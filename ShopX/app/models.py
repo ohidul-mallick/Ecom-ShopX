@@ -51,6 +51,7 @@ class Customer(models.Model):
     city=models.CharField(max_length=50)
     zipcode=models.IntegerField()
     state=models.CharField(choices=STATE_CHOICES,max_length=50)
+    objects=models.Manager()
 
     def __str__(self):
         return str(self.id)
@@ -71,6 +72,8 @@ class Product(models.Model):
     brand=models.CharField(max_length=100)
     category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
     product_image=models.ImageField(upload_to='product_IMG')
+    For=models.CharField(max_length=20, null=True , blank=True)
+    objects=models.Manager()
 
     def __str__(self):
         return str(self.id)
@@ -81,6 +84,7 @@ class Cart(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField(default=1)
+    objects=models.Manager()
 
     def __str__(self):
         return str(self.id)
@@ -102,3 +106,4 @@ class OrderPlaced(models.Model):
     quantity=models.PositiveIntegerField(default=1)
     ordered_date=models.DateTimeField(auto_now_add=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='Pending')
+    objects=models.Manager()
