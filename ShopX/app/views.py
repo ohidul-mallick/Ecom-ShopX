@@ -6,6 +6,8 @@ from .models import (
     Cart,
     OrderPlaced
 )
+from django.contrib import messages
+from .forms import CustomerRegistrationform
 
 # def home(request):
 #  return render(request, 'app/home.html')
@@ -51,8 +53,8 @@ def address(request):
 def orders(request):
  return render(request, 'app/orders.html')
 
-def change_password(request):
- return render(request, 'app/changepassword.html')
+# def change_password(request):
+#  return render(request, 'app/changepassword.html')
 
 def mobile(request, data=None):
     if data==None:
@@ -66,11 +68,23 @@ def mobile(request, data=None):
 
     return render(request, 'app/mobile.html',{'mobiles':mobiles})
 
-def login(request):
- return render(request, 'app/login.html')
+# def login(request):
+#  return render(request, 'app/login.html')
 
-def customerregistration(request):
- return render(request, 'app/customerregistration.html')
+
+
+
+class CustomerRegistrationView(View):
+    def get(self,request):
+        form=CustomerRegistrationform()
+        return render(request,'app/customerregistration.html',{'form':form})
+    def post(self,request):
+        form=CustomerRegistrationform(request.POST)
+        if form.is_valid():
+            messages.success(request,'Congratulations !! You Have Registered Successfully')
+            form.save()
+        return render(request,'app/customerregistration.html',{'form':form})
+
 
 def checkout(request):
  return render(request, 'app/checkout.html')
