@@ -9,7 +9,12 @@ from .forms import LoginForm,MyPasswordChangeForm,MyPasswordResetForm,MySetPassw
 urlpatterns = [
     path('', views.ProductView.as_view(),name='home'),
     path('product-detail/<int:pk>', views.ProductDetailView.as_view(), name='product-detail'),
-    path('cart/', views.add_to_cart, name='add-to-cart'),
+    path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
+    path('cart/',views.show_Cart,name='showcart'),
+    path('pluscart/',views.plus_cart,name='pluscart'),
+    path('minuscart/',views.minus_cart,name='minuscart'),
+    path('removecart/',views.remove_cart,name='removecart'),
+
     path('buy/', views.buy_now, name='buy-now'),
     
     path('profile/', views.ProfileView.as_view(), name='profile'),
@@ -40,5 +45,6 @@ urlpatterns = [
 
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
+    path('paymentdone/', views.paymentdone, name='paymentdone'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

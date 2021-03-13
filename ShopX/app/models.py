@@ -89,6 +89,10 @@ class Cart(models.Model):
     def __str__(self):
         return str(self.id)
     
+    @property
+    def total_cost(self):
+        return self.quantity * self.product.discount_price
+    
 
 
 STATUS_CHOICES=(
@@ -107,3 +111,7 @@ class OrderPlaced(models.Model):
     ordered_date=models.DateTimeField(auto_now_add=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='Pending')
     objects=models.Manager()
+
+    @property
+    def total_cost(self):
+        return self.quantity * self.product.discount_price
