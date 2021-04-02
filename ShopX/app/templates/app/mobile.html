@@ -1,6 +1,7 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block title %}Mobile{% endblock title %}
+{% block cart %} {{length}} {% endblock %}
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
@@ -33,7 +34,7 @@
                             <div class="fw-bold">{{product.title}}</div>
                             <div class="fw-bold">{{product.brand}}</div>
                             <div class="fw-bold">Rs. ₹{{product.discount_price}} <small
-                                    class="fw-light text-decoration-line-through">Rs. ₹{{product.selling_price}}</small>
+                                    class="text-muted text-decoration-line-through">Rs. ₹{{product.selling_price}}</small>
                             </div>
 
                         </div>

@@ -31,7 +31,7 @@
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
            <li class="nav-item">
-             <a class="nav-link active" aria-current="page" href="/">Home</a>
+             <a class="nav-link active" aria-current="page" href="/">Store</a>
            </li>
            <li class="nav-item dropdown">
              <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,7 +39,7 @@
              </a>
              <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
                <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
-               <li><a class="dropdown-item" href="#">Laptop</a></li>
+               <li><a class="dropdown-item" href="{% url 'laptop' %}">Laptop</a></li>
              </ul>
            </li>
            <li class="nav-item dropdown">
@@ -47,14 +47,25 @@
                Fashion
              </a>
              <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
-               <li><a class="dropdown-item" href="#">Top Wear</a></li>
-               <li><a class="dropdown-item" href="#">Bottom Wear</a></li>
+               <li><a class="dropdown-item" href="#">Mens </a></li>
+               <li><a class="dropdown-item" href="#">Womens </a></li>
+               <li><a class="dropdown-item" href="#">Babies </a></li>
+             </ul>
+           </li>
+           <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               Home
+             </a>
+             <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
+               <li><a class="dropdown-item" href="#">Appliances</a></li>
+               <li><a class="dropdown-item" href="#">Furnitures</a></li>
+               <li><a class="dropdown-item" href="#">Groceries</a></li>
              </ul>
            </li>
          </ul>
          <form class="d-flex">
            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-           <button class="btn btn-warning" type="submit">S</button>
+           <button class="btn btn-warning" type="submit">Search</button>
          </form>
          <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -71,7 +82,7 @@
               </ul>
             </li>
             <li class="nav-item mx-2">
-             <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">4</span> Cart </a>
+             <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">{% block cart %} {% endblock %}</span> Cart </a>
             </li>
             {% else %}
             <li class="nav-item mx-2">
@@ -91,8 +102,8 @@
     {% block main-content %} {% endblock main-content %}
 
     <!-- Start Footer -->
-    <footer class="container-fluid bg-dark text-center p-2 mt-5">
-        <small class="text-white">Copyright &copy; 2021 || Designed By GeekyShows || </small>
+    <footer style="min-height: 70vh max-height : 100vh" class="container-fluid bg-dark text-center p-2 mt-5">
+        <small class="text-white">Copyright &copy; 2021 || Designed By Ohidul Mallick || </small>
         <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
     </footer> <!-- End Footer -->
 

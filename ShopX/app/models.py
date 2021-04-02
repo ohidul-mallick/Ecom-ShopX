@@ -69,6 +69,7 @@ class Product(models.Model):
     selling_price=models.FloatField()
     discount_price=models.FloatField()
     description=models.TextField()
+    specification = models.TextField(null=True,blank=True)
     brand=models.CharField(max_length=100)
     category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
     product_image=models.ImageField(upload_to='product_IMG')
@@ -83,8 +84,9 @@ class Product(models.Model):
 class Cart(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity=models.PositiveIntegerField(default=1)
+    quantity=models.PositiveIntegerField(validators=[MinValueValidator(1)],default=1)
     objects=models.Manager()
+
 
     def __str__(self):
         return str(self.id)

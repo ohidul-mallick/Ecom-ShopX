@@ -19,3 +19,8 @@
  font-size: 24px;
  font-weight: bold;
 }
+
+#myImg{
+    max-width:fit-content !important;
+}
+

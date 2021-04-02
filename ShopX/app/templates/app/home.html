@@ -1,7 +1,7 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block title %}Home{% endblock title %}
-
+{% block cart %} {{length}} {% endblock %}
 {% block banner_slider %}
 <!--Banner Slider-->
  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -46,7 +46,18 @@
 {% block main-content %}
 <!-- 1st Product Slider -->
 <div class="m-3">
- <h2>ShoppingX Bottom Wears</h2>
+  <div class="mb-3 mt-3 border-top border-bottom px-4">
+    <h4 class="d-flex justify-content-between ">
+    <div class="mt-2">
+    <span>Top Deals For you</span>
+    <h6 class="text-muted font-monospace">Based On Your Interest
+    </h6>
+    </div>
+      <a href="#" class="btn btn-primary mb-2 mt-3">VIEW ALL</a>
+      
+    </h4>
+    
+  </div>
  <!-- Slider 1 -->
  <div class="owl-carousel" id="slider1">
  {% for b in bottomwears %}
@@ -58,6 +69,14 @@
 
 <!-- Payment Info Section -->
 <div class="container my-5">
+  <div class="mb-3 mt-3 px-4">
+    <h4 class="d-flex justify-content-between ">
+    <div class="mt-2">
+    <span>We Accept</span>
+    </div>
+    </h4>
+    
+  </div>
  <div class="row">
   <div class="col-sm-3">
    <div class="card mb-3">
@@ -93,7 +112,18 @@
 
 <!-- 2nd Product Slider -->
 <div class="mx-3">
- <h2>ShoppingX Top Wears</h2>
+  <div class="mb-3 mt-3 border-top border-bottom px-4">
+    <h4 class="d-flex justify-content-between ">
+    <div class="mt-2">
+    <span>Suggested For You</span>
+    <h6 class="text-muted font-monospace">Inspired by Your Interest
+    </h6>
+    </div>
+      <a href="#" class="btn btn-primary mb-2 mt-3">VIEW ALL</a>
+      
+    </h4>
+    
+  </div>
  <!-- Slider 2 -->
  <div class="owl-carousel" id="slider2">
   {% for t in topwears %}
@@ -106,7 +136,18 @@
 
 <!-- 3rd Product Slider -->
 <div class="mx-3">
- <h2>ShoppingX Mobiles</h2>
+  <div class="mb-3 mt-3 border-top border-bottom px-4">
+    <h4 class="d-flex justify-content-between ">
+    <div class="mt-2">
+    <span>You May Like...</span>
+    <h6 class="text-muted font-monospace">Similar to Items You Viewed
+    </h6>
+    </div>
+      <a href="/mobile/" class="btn btn-primary mb-2 mt-3">VIEW ALL</a>
+      
+    </h4>
+    
+  </div>
  <!-- Slider 3 -->
  <div class="owl-carousel" id="slider3">
   {% for m in mobiles %}

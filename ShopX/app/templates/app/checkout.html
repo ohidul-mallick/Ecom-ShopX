@@ -1,6 +1,7 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block title %}Checkout{% endblock title %}
+{% block cart %} {{length}} {% endblock %}
 {% block main-content %}
 <div class="container">
  <div class="row mt-5">
@@ -16,12 +17,13 @@
         </div>
       </div>
       {% endfor %}
-      <p class="fw-bold">Total Cost + Rs. 70 = {{totalAmount}}</p>
+      <p class="fw-bold">Total Cost + Rs. 70(Shipping) = {{totalAmount}}</p>
     <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
   </div>
   <div class="col-sm-4 offset-sm-1">
     <h4>Select Shipping Address</h4>
     <hr>
+    {% if add %}
     <form action="/paymentdone">
     {% for ad in add %}
       <div class="card">
@@ -40,7 +42,53 @@
           <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
         </div>
       </form>
+      {% else %}
+      <h6 class="text-muted" >You Do Not Have Added Any Address Yet</h6>
+      <h6 class="text-muted">Please Add Address To Place your Order</h6>
+      <div>
+      <button><a href=""></a></button>
+      </div>
+      {% endif %}
     </div>
   </div>
 </div>
+
+    <hr class="my-4">
+
+    <!-- Social icons -->
+    <div class="pb-1 text-center">
+        <h6 class="">Follow Us On Social </h6>
+        <a href="https://www.facebook.example.com" target="_blank">
+            <i class="fab fa-facebook-f mr-3"></i>
+        </a>
+
+        <a href="https://twitter.example.com" target="_blank">
+            <i class="fab fa-twitter mr-3"></i>
+        </a>
+
+        <a href="https://www.youtube.example.com" target="_blank">
+            <i class="fab fa-youtube mr-3"></i>
+        </a>
+
+        <a href="https://plus.google.example.com" target="_blank">
+            <i class="fab fa-google-plus-g mr-3"></i>
+        </a>
+
+        <a href="https://dribbble.example.com" target="_blank">
+            <i class="fab fa-dribbble mr-3"></i>
+        </a>
+
+        <a href="https://pinterest.example.com" target="_blank">
+            <i class="fab fa-pinterest mr-3"></i>
+        </a>
+
+        <a href="https://github.com/ohidul-mallick/Ecom" target="_blank">
+            <i class="fab fa-github mr-3"></i>
+        </a>
+
+        <a href="http://codepen.example.io" target="_blank">
+            <i class="fab fa-codepen mr-3"></i>
+        </a>
+    </div>
+    <!-- Social icons -->
 {% endblock main-content %}
