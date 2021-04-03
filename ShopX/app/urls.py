@@ -19,9 +19,13 @@ urlpatterns = [
 
     path('buy/', views.buy_now, name='buy-now'),
     
-    path('profile/', views.ProfileView.as_view(), name='profile'),
+    # path('profile/', views.ProfileView.as_view(), name='profile'),
+    path('profile/', views.profileDetail, name='profile'),
 
     path('address/', views.address, name='address'),
+    path('addAddress/', views.addAddressDetail, name='addAddress'),
+    path('delAddress/<int:pk>', views.delAddress, name='delAddress'),
+
     path('orders/', views.orders, name='orders'),
     # path('changepassword/', views.change_password, name='changepassword'),
     path('mobile/<slug:data>', views.mobile, name='mobiledata'),
@@ -50,6 +54,7 @@ urlpatterns = [
 
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
+    path('payment/', views.payment, name='payment'),
     path('paymentdone/', views.paymentdone, name='paymentdone'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,0 +1,151 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block cart %} {{length}} {% endblock %}
+{% block main-content %}
+
+
+
+
+<br>
+
+<div class="container ps-0">
+    <div class=" row">
+
+        <div style="background-color: #fff;" class="col-3 pe-0">
+            <div>
+                <div class="row shadow p-3 mb-5 bg-white rounded">
+                    <div class="col-4">
+                        <img class="rounded-circle bg-warning pt-1" height="60px" width="60px"
+                            src="{% static 'app/images/user.png' %}" alt="Customer Photo">
+                    </div>
+                    <div class="col-8">
+                        <small>Hello,</small>
+                        <div><strong>{{name|title}}</strong></div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div style="background-color: #fff;">
+                <div class="row">
+                    <div class="col-2">
+                        <h5><i class="fas fa-box text-primary"></i></h5>
+
+                    </div>
+
+                    <div class="col-10 d-flex position-relative justify-content-between">
+                        <a style="text-decoration: none;" class="stretched-link" href="#">
+                            <h5 class="text-muted">MY ORDERS</h5>
+                        </a>
+                        <span><i class="fas fa-chevron-right"></i></span>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div>
+                <div class="row">
+                    <div class="col-2">
+                        <h6><i class="fas fa-user text-primary"></i></h6>
+
+                    </div>
+
+                    <div class="col-10 d-flex justify-content-between">
+                            <h6 class="text-muted">ACCOUNT SETTINGS</h6>
+                        
+                        <!-- <span><i class="fas fa-chevron-right"></i></span> -->
+
+                    </div>
+                    <div class="list-group">
+
+                    
+                            {% comment %} <a style="text-decoration: none;" class="ps-5 pt-3 list-group-item list-group-item-action" href="templates/store/abc.html" target="abcframe">Profile Information</a> {% endcomment %}
+                            <a style="text-decoration: none;" class="ps-5 pt-3 list-group-item list-group-item-action active" href="/profile/" target="abcframe">Profile Information</a>
+                            
+                        
+                            <a style="text-decoration: none;" class="ps-5 pt-3 list-group-item list-group-item-action" href="{% url 'address' %}">Manage Addresses</a>
+                            
+                        
+                            <a style="text-decoration: none;" class="ps-5 pt-3 list-group-item list-group-item-action" href="">PAN Card Informatin</a>
+                            
+                        
+
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <div>
+                <div class="row">
+                    <div class="col-2">
+                        <h6><i class="fas fa-wallet text-primary"></i></h6>
+                        
+
+                    </div>
+
+                    <div class="col-10 d-flex justify-content-between">
+                            <h6 class="text-muted">PAYMENTS</h6>
+                        
+
+                    </div>
+                    <div class="list-group">
+
+                      
+                            <a style="text-decoration: none;" class="ps-5 pt-3 list-group-item list-group-item-action" href="">Saved UPI</a>
+                            
+                        
+                            <a style="text-decoration: none;" class="ps-5 pt-3 list-group-item list-group-item-action" href="">Gift Cards</a>
+                            
+                        
+                            <a style="text-decoration: none;" class="ps-5 pt-3 list-group-item list-group-item-action" href="">PAYMENT History</a>
+                            
+                        
+
+                    </div>
+
+                </div>
+            </div>
+
+            <br>
+            <div>
+                <div class="row">
+                    <div class="col-2">
+                        <h5><i class="fas fa-power-off text-primary"></i></h5>
+                        
+
+                    </div>
+
+                    <div class="col-10 d-flex position-relative justify-content-between">
+                        <a style="text-decoration: none;" href="/logout/"><h6 class="stretched-link text-muted">LOGOUT</h6></a>
+                            
+                        
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-8">
+            {% block profile %}
+
+
+            {% endblock profile %}
+        </div>
+
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+{% endblock main-content %}

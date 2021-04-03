@@ -6,6 +6,7 @@ from .models import (
     Cart,
     OrderPlaced
 )
+from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import CustomerRegistrationform,CustomerProfileForm
 from django.db.models import Q
@@ -212,7 +213,7 @@ def address(request):
     user=request.user
     cart_product=[p for p in Cart.objects.all() if p.user==user]
     length = len(cart_product)
-    return render(request, 'app/address.html',{'add':add,'active':'btn-primary','length':length})
+    return render(request, 'app/address.html',{'name':user,'add':add,'active':'btn-primary','length':length})
 
 
 @login_required()
@@ -298,13 +299,20 @@ def checkout(request):
         totalAmount=amount+shipping_amount
     return render(request, 'app/checkout.html',{'add':add,'cartItems':cart_items,'totalAmount':totalAmount,'length':length})
 
+
+def payment(request):
+    return render(request,'app/payment.html')
+
+
 @login_required()
 def paymentdone(request):
     user=request.user
     cart_product=[p for p in Cart.objects.all() if p.user==user]
     length = len(cart_product)
     custid=request.GET.get('custid')
+    print(custid)
     customer=Customer.objects.get(id=custid)
+    print(customer)
     cart= Cart.objects.filter(user=user)
     for c in cart:
         OrderPlaced(user=user,customer=customer,product=c.product,quantity=c.quantity).save()
@@ -312,3 +320,39 @@ def paymentdone(request):
     return redirect("orders")
 
 
+
+def profileDetail(request):
+    username=request.user.username
+    user=request.user
+    customer = User.objects.get(username=user)
+    # customer =Customer.objects.filter(user=user)
+    print(customer)
+    # cust = customer[0]
+    cart_product=[p for p in Cart.objects.all() if p.user==user]
+    length = len(cart_product)
+
+    return render(request,'app/profile_info.html',{'name':user,'cust':customer,'length':length})
+
+
+def addAddressDetail(request):
+    if request.method =='POST':
+        fm=CustomerProfileForm(request.POST)
+        if fm.is_valid():
+            profile = fm.save(commit=False)
+            profile.user = request.user
+            messages.success(request,'Congratulations !! Your Address Added Successfully')
+            profile.save()
+            
+
+    if request.method =='GET':
+        fm=CustomerProfileForm()
+    user=request.user
+    cart_product=[p for p in Cart.objects.all() if p.user==user]
+    length = len(cart_product)
+    return render(request,'app/addAdress.html',{'name':user,'length':length,'form':fm})
+
+
+def delAddress(request,pk):
+    customer=Customer.objects.filter(id=pk)
+    customer.delete()
+    return HttpResponseRedirect('/address/')

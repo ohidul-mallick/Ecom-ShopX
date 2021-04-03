@@ -47,6 +47,7 @@ STATE_CHOICES=(
 class Customer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     name=models.CharField(max_length=150)
+    mobile = models.IntegerField(blank=True,null=True,default= "01234567890")
     locality=models.CharField(max_length=50)
     city=models.CharField(max_length=50)
     zipcode=models.IntegerField()

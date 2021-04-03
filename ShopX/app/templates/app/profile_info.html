@@ -1,0 +1,40 @@
+{% extends 'app/profile1.html' %}
+{% load static %}
+{% block profile %}
+
+<div class="ms-3 mt-5">
+<div class="d-flex justify-content-center">
+<h4>Personal Information</h4>
+<button class="ms-5 btn btn-sm btn-info" id="editbtn">Edit Info</button>
+
+</div>
+<form>
+    <fieldset disabled>
+    <legend>Your Name</legend>
+    <div class="mb-3">
+        {% comment %} <label for="disabledTextInput" class="form-label">Disabled input</label> {% endcomment %}
+        <input type="text" id="disabledTextInput" class="form-control" placeholder="{{cust.username}}">
+    </div>
+    <small>Your Gender</small>
+    <div class="mb-3">
+        {% comment %} <label for="disabledTextInput" class="form-label">Disabled input</label> {% endcomment %}
+        <input type="text" id="disabledTextInput" class="form-control" placeholder="Male">
+    </div>
+    <legend>Email Address</legend>
+    <div class="mb-3">
+        {% comment %} <label for="disabledTextInput" class="form-label">Disabled input</label> {% endcomment %}
+        <input type="text" id="disabledTextInput" class="form-control" placeholder="{{cust.email}}">
+    </div>
+    <legend>Mobile Number</legend>
+    <div class="mb-3">
+        {% comment %} <label for="disabledTextInput" class="form-label">Disabled input</label> {% endcomment %}
+        <input type="text" id="disabledTextInput" class="form-control" placeholder="1234567890">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+    
+</form>
+
+</div>
+
+{% endblock profile %}
