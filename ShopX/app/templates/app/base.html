@@ -47,8 +47,8 @@
                Fashion
              </a>
              <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
-               <li><a class="dropdown-item" href="#">Mens </a></li>
-               <li><a class="dropdown-item" href="#">Womens </a></li>
+               <li><a class="dropdown-item" href="{% url 'fashiondata' 'men' %}">Mens </a></li>
+               <li><a class="dropdown-item" href="{% url 'fashiondata' 'women' %}">Womens </a></li>
                <li><a class="dropdown-item" href="#">Babies </a></li>
              </ul>
            </li>
@@ -63,8 +63,8 @@
              </ul>
            </li>
          </ul>
-         <form class="d-flex">
-           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+         <form class="d-flex" action="{% url 'search' %}" method="get">
+           <input class="form-control me-2" name="keyword" type="search" placeholder="Search" aria-label="Search" Required>
            <button class="btn btn-warning" type="submit">Search</button>
          </form>
          <div>

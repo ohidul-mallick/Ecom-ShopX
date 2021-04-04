@@ -141,31 +141,6 @@ def remove_cart(request,pk):
         return HttpResponseRedirect('cart/')
 
 
-# @login_required()
-# def remove_cart(request):
-#     if request.method=='GET':
-#         prod_id=request.GET['prod_id']
-#         c=Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
-        
-#         c.delete()
-#         amount=0.0
-#         shipping_amount=70.0
-#         total_amount=0.0
-#         cart_product=[p for p in Cart.objects.all() if p.user==request.user]
-#         if len(cart_product)<1:
-#             return HttpResponseRedirect('cart/')
-
-#         for p in cart_product:
-#             tempAmount=(p.quantity * p.product.discount_price)
-#             amount+=tempAmount
-#             data={
-#                 'amount':amount,
-#                 'totalamount':amount+shipping_amount
-#             }
-#         return HttpResponseRedirect('cart/')
-#         # return JsonResponse(data)
-
-
 
 
 @login_required()
@@ -224,8 +199,6 @@ def orders(request):
     length = len(cart_product)
     return render(request, 'app/orders.html',{'orderPlaced':op,'length':length})
 
-# def change_password(request):
-#  return render(request, 'app/changepassword.html')
 
 def laptop(request, data=None):
     user=request.user
@@ -259,9 +232,25 @@ def mobile(request, data=None):
 
     return render(request, 'app/mobile.html',{'mobiles':mobiles,'length':length})
 
-# def login(request):
-#  return render(request, 'app/login.html')
 
+def fashion(request,data=None):
+    user=request.user
+    cart_product=[p for p in Cart.objects.all() if p.user==user]
+    length = len(cart_product)
+    if data==None:
+        wears = Product.objects.filter(Q(category='BW') | Q(category='TW'))
+    elif data=='Bottom-Wear':
+        wears = Product.objects.filter(category='BW')
+    elif data=='Top-Wear':
+        wears = Product.objects.filter(category='TW')
+    elif data=='men':
+        wears = Product.objects.filter(For='men')
+    elif data=='women':
+        wears = Product.objects.filter(For='women')
+        
+    
+
+    return render(request,'app/fashion.html',{'length':length,'wears':wears})
 
 
 
@@ -299,7 +288,7 @@ def checkout(request):
         totalAmount=amount+shipping_amount
     return render(request, 'app/checkout.html',{'add':add,'cartItems':cart_items,'totalAmount':totalAmount,'length':length})
 
-
+@login_required()
 def payment(request):
     return render(request,'app/payment.html')
 
@@ -320,20 +309,17 @@ def paymentdone(request):
     return redirect("orders")
 
 
-
+@login_required()
 def profileDetail(request):
     username=request.user.username
     user=request.user
     customer = User.objects.get(username=user)
-    # customer =Customer.objects.filter(user=user)
-    print(customer)
-    # cust = customer[0]
     cart_product=[p for p in Cart.objects.all() if p.user==user]
     length = len(cart_product)
 
     return render(request,'app/profile_info.html',{'name':user,'cust':customer,'length':length})
 
-
+@login_required()
 def addAddressDetail(request):
     if request.method =='POST':
         fm=CustomerProfileForm(request.POST)
@@ -351,8 +337,28 @@ def addAddressDetail(request):
     length = len(cart_product)
     return render(request,'app/addAdress.html',{'name':user,'length':length,'form':fm})
 
-
+@login_required()
 def delAddress(request,pk):
     customer=Customer.objects.filter(id=pk)
     customer.delete()
     return HttpResponseRedirect('/address/')
+
+
+def search(request):
+    user=request.user
+    cart_product=[p for p in Cart.objects.all() if p.user==user]
+    length = len(cart_product)
+    kw= request.GET['keyword'].lower()
+    print(kw)
+    if kw=='men' or kw=='mens':
+        results=Product.objects.filter(For='men')
+    elif kw=='women' or kw=='womens':
+        results=Product.objects.filter(For='women')
+    elif kw=='laptop' or kw=='laptops':
+        results=Product.objects.filter(category='L')
+    elif kw=='mobile' or kw=='mobiles':
+        results=Product.objects.filter(category='M')
+    else:
+        results = Product.objects.filter(title__contains=kw)
+    print(results)
+    return render(request,'app/search.html',{'length':length,'results':results})
